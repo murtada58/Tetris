@@ -644,7 +644,7 @@ function changePiece()
     changed = false;
     nextPiece.shift();
     let temp1 = randomInt(numberOfPieces);
-    while (temp1 == nextPiece[1]){temp1 = randomInt(numberOfPieces);}
+    while (temp1 == nextPiece[nextPiece.length - 1]){temp1 = randomInt(numberOfPieces);}
     nextPiece.push(temp1);
 }
 

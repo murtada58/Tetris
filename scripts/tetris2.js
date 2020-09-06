@@ -38,7 +38,7 @@ for (let i = 0; i < nextPiece.length; i++)
 {
     nextPiece.shift();
     let temp1 = randomInt(numberOfPieces);
-    while (temp1 == nextPiece[1]){temp1 = randomInt(numberOfPieces);}
+    while (temp1 == nextPiece[nextPiece.length - 1]){temp1 = randomInt(numberOfPieces);}
     nextPiece.push(temp1);
 }
 let currentPieceNumber = nextPiece[0];
