@@ -3,9 +3,15 @@
     margin: 0;
     border: 0;
   }
-  
-  @media (width: 1920px){
-    body{
-      zoom: 125%;
-    }
+
+@media (max-width: 1366px){
+  body{
+    zoom: 83.35%;
   }
+}
+
+@media (min-width: 1920px){
+  body{
+    zoom: 125%;
+  }
+}
