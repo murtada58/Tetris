@@ -4,3 +4,8 @@
     border: 0;
   }
   
+  @media (width: 1920px){
+    body{
+      zoom: 125%;
+    }
+  }

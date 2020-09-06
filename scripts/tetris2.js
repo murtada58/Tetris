@@ -22,6 +22,7 @@ let pieceColors = ["#FFDDCC", "#6EB5FF", "#D5AAFF", "#C4FAF8", "#FFFFD1", "#BFFC
 //let pieceColors = ["#e2711d", "#274c77", "#7b2cbf", "#147df5", "#f6aa1c", "#008000", "#a71e34"];   darker pastel
 let pieceBorderColors = ["#DDBBAA", "#4C93DD", "#B388DD", "#A2D8D6", "#DDDDA9", "#9DDAA4", "#DD8989"]; // pastel borders
 let backGroundColor = "#222222";
+let gameBoardColor = "#222222";
 let topPieceColor = "#333333";
 let scoreBoardColor = "#222222";
 let phantomColor = "grey";
@@ -139,7 +140,7 @@ function update()
 
 function draw()
 {
-    colorRect(gridOffset[0], gridOffset[1], size*gridSize[0], size*gridSize[1], backGroundColor);
+    colorRect(gridOffset[0], gridOffset[1], size*gridSize[0], size*gridSize[1], gameBoardColor);
     for (let i = 0; i < gridSize[0]; i++)
     {
         for (let j = 0; j < gridSize[1]; j++)
