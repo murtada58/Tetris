@@ -4,30 +4,29 @@
     border: 0;
   }
 
-@media (min-width: 1366px){
+@media (max-width: 1366px){
   body{
-    zoom: 105%;
+    zoom: 90%;
   }
   canvas{
-    margin-left: 400px;
+    margin-left: 420px;
   }
 }
 
-@media (min-width: 1367px){
+@media (min-width: 1536px){
   body{
-    zoom: 135%;
+    zoom: 100%;
   }
   canvas{
-    margin-left: 350px;
+    margin-left: 490px;
   }
 }
-
 
 @media (min-width: 1601px){
   body{
-    zoom: 135%;
+    zoom: 125%;
   }
   canvas{
-    margin-left: 430px;
+    margin-left: 490px;
   }
 }
