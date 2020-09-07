@@ -16,6 +16,7 @@ let framesPerSecond = 60;
 let numberOfPieces = 7;
 let nextPiece = [0, 0, 0, 0, 0]
 let heldpiece = randomInt(numberOfPieces);
+let pause = true;
 
 //let pieceColors = ["orange", "darkblue", "purple", "lightblue", "yellow", "green", "darkred"];
 let pieceColors = ["#FFDDCC", "#6EB5FF", "#D5AAFF", "#C4FAF8", "#FFFFD1", "#BFFCC6", "#FFABAB"]; // Pastel
@@ -94,25 +95,28 @@ window.onload = () =>
     makeColorGrid();
     setInterval(() =>
     {
-        time += 1/framesPerSecond;
         draw();
-        leftHeld();
-        rightHeld();
-        if (framesPerSecond/speed <= timer)
+        if (!pause)
         {
-            if (!nextBottomCollided() || timer/framesPerSecond >= decsicsionTime)
+            time += 1/framesPerSecond;
+            leftHeld();
+            rightHeld();
+            if (framesPerSecond/speed <= timer)
             {
-                update();
-                timer = 0;
+                if (!nextBottomCollided() || timer/framesPerSecond >= decsicsionTime)
+                {
+                    update();
+                    timer = 0;
+                }
+                else
+                {
+                    timer++;
+                }
             }
             else
             {
                 timer++;
             }
-        }
-        else
-        {
-            timer++;
         }
         //console.log(timer)
     }, 1000 / framesPerSecond);
@@ -132,7 +136,7 @@ function update()
     {
         if (grid[i][1] == 1)
         {
-            resetGrid();
+            pause = true;
         }
     }
     timerReset = 0;
@@ -272,6 +276,13 @@ function draw()
 
     canvasContext.fillText("Time(s)", 10, (size*21) + gridOffset[1]);
     canvasContext.fillText((Math.round(time * 100) / 100).toFixed(2), 10, 25 + (size*21) + gridOffset[1]);
+
+    if (pause)
+    {
+        canvasContext.fillStyle = "white";
+        canvasContext.font = '49px roboto condensed';
+        canvasContext.fillText("Press S to Start", gridOffset[0] + (size*gridSize[0]/2) - 151, (size*gridSize[1]/2) + gridOffset[1]);
+    }
     
 }
 

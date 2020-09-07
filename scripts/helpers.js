@@ -13,7 +13,7 @@ function colorRectTetramino(leftX, topY, width, height, colorout, colorin)
     canvasContext.fillStyle = colorin;
     canvasContext.fillRect(leftX + 2, topY + 2, width - 4, height - 4);
     canvasContext.fillStyle = colorout;
-    canvasContext.fillRect(leftX + 5, topY + 5, width - 10, height- 10);
+    canvasContext.fillRect(leftX + 5, topY + 5, width - 10, height - 10);
     //canvasContext.fillStyle = colorin;
     //canvasContext.fillRect(leftX + 10, topY + 10, width - 20, height - 20);
 }
@@ -31,11 +31,15 @@ let spaceKeyDown = false;
 let cKeyDown = false;
 let xKeyDown = false;
 let zKeyDown = false;
+let sKeyDown = false;
 
 function keyUp(evt)
 {
     switch(evt.keyCode)
     {
+        case 83:
+            sKeyDown = false;
+            break
         case 32:
             spaceKeyDown = false;
             break
@@ -71,8 +75,16 @@ function keyPressed(evt)
 
         switch(evt.keyCode)
         {
+            case 83:
+                if (!sKeyDown && pause)
+                {
+                    pause = false;
+                    sKeyDown = true;
+                    resetGrid();
+                }
+                break
             case 32:
-                if (!spaceKeyDown)
+                if (!spaceKeyDown && !pause)
                 {
                     while(!bottomCollision())
                     {
@@ -83,14 +95,14 @@ function keyPressed(evt)
                     {
                         if (grid[i][1] == 1)
                         {
-                            resetGrid();
+                            pause = true;
                         }
                     }
                     spaceKeyDown = true;
                 }      
                 break
             case 37:
-                if (!leftKeyDown)
+                if (!leftKeyDown && !pause)
                 {  
                     if(!leftCollision())
                     {
@@ -100,14 +112,14 @@ function keyPressed(evt)
                 }
                 break
             case 38:
-                if (!upKeyDown)
+                if (!upKeyDown && !pause)
                 {
                     rotateClockwise();
                     upKeyDown = true;
                 }
                 break
             case 39:
-                if (!rightKeyDown)
+                if (!rightKeyDown && !pause)
                 {
                     
                     if(!rightCollision())
@@ -118,14 +130,14 @@ function keyPressed(evt)
                 }
                 break
             case 40:
-                if (!downKeyDown)
+                if (!downKeyDown && !pause)
                 {
                     speed = dropDownSpeed;
                     downKeyDown = true;
                 }
                 break
             case 67:
-                if (!cKeyDown)
+                if (!cKeyDown && !pause)
                 {
                     if(!changed)
                     {
@@ -136,14 +148,14 @@ function keyPressed(evt)
                 }
                 break
             case 88:
-                if (!xKeyDown)
+                if (!xKeyDown && !pause)
                 {
                     rotateClockwise();
                     xKeyDown = true;
                 }
                 break
             case 90:
-                if (!zKeyDown)
+                if (!zKeyDown && !pause)
                 {
                     rotateCounterClockwise();
                     zKeyDown = true;
@@ -322,8 +334,19 @@ function rotateClockwise()
     while (rotateBottomCollided())
     {
         //console.log("bottom")
-        currentPiecePosition[1] -= 1;
+        currentPiecePosition[1] += 1;
         numberDisplacements++;
+    }
+    if (numberDisplacements > 2)
+    {
+        currentPiecePosition[1] -= numberDisplacements;
+        numberDisplacements = 0;
+        while (rotateBottomCollided())
+        {
+            //console.log("bottom")
+            currentPiecePosition[1] -= 1;
+            numberDisplacements++;
+        }
     }
     if (numberDisplacements > 2)
     {
